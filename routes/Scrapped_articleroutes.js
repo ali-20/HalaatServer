@@ -1,49 +1,31 @@
-const express= require('express');
-var router= express.Router();
-var mangoscrapper= require("./News_Scrapping/News_Scrapper");
-var dawnscrapper=require("./News_Scrapping/Searched_ArticlesScrapped");
-var propakistaniscrapper=require("./News_Scrapping/propakistaniscrapped")
+const express = require("express");
+var router = express.Router();
+var mangoscrapper = require("./News_Scrapping/News_Scrapper");
+var dawnscrapper = require("./News_Scrapping/Searched_ArticlesScrapped");
+var propakistaniscrapper = require("./News_Scrapping/propakistaniscrapped");
 
+router.post("/mangobaaz", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
 
-router.post("/mangobaaz",(req,res)=>{
+  mangoscrapper().then((x) => {
+    res.send(x);
+  });
+});
 
-    mangoscrapper().then(x=>{
+router.post("/dawn", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
 
+  dawnscrapper().then((x) => {
+    res.send(x);
+  });
+});
 
-        res.send(x)
+router.post("/propakistani", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
 
-    })
+  propakistaniscrapper().then((x) => {
+    res.send(x);
+  });
+});
 
-
-})
-
-
-router.post("/dawn",(req,res)=>{
-
-    dawnscrapper().then(x=>{
-
-
-        res.send(x)
-
-    })
-
-
-})
-
-
-
-router.post("/propakistani",(req,res)=>{
-
-   propakistaniscrapper().then(x=>{
-
-
-        res.send(x)
-
-    })
-
-
-})
-
-
-
-module.exports=router;
+module.exports = router;
