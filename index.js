@@ -21,6 +21,7 @@ app.use(function (req, res, next) {
 var allowedOrigins = [
   "https://halaatportal.netlify.app",
   "https://halaatowaqiat.netlify.app",
+  "https://halaatportal.netlify.app/RegisterWriter",
 ];
 app.use(
   cors({
