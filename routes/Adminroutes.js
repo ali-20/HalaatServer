@@ -52,28 +52,30 @@ router.post("/RegisterWriter", async (req, res) => {
 
   var hashed = bcrypt.hashSync(password, 10);
 
-  if (!req.files) {
-    res.json({
-      Msg: "Profile Picture is not uploaded",
-    });
-  }
+  // if (!req.files) {
+  //   res.json({
+  //     Msg: "Profile Picture is not uploaded",
+  //   });
+  // }
 
-  var image = req.files.uploaded_image;
-  var image_name = image.name;
-  var imagewithpath = __dirname + "/writersProfilePictures/" + image_name;
+  // var image = req.files.uploaded_image;
+  // var image_name = image.name;
+  // var imagewithpath = __dirname + "/writersProfilePictures/" + image_name;
 
-  if (
-    image.mimetype == "image/jpeg" ||
-    image.mimetype == "image/png" ||
-    image.mimetype == "image/gif"
-  ) {
-    image.mv(__dirname + "/writersProfilePictures/" + image_name, (err) => {
-      if (err) {
-        res.json({
-          Msg: "Failed to Upload for some reasons",
-        });
-      } else {
-        var insertquery = `INSERT INTO writers 
+  // if (
+  //   image.mimetype == "image/jpeg" ||
+  //   image.mimetype == "image/png" ||
+  //   image.mimetype == "image/gif"
+  // ) {
+  //   image.mv(__dirname + "/writersProfilePictures/" + image_name, (err) => {
+  //     if (err) {
+  //       res.json({
+  //         Msg: "Failed to Upload for some reasons",
+  //       });
+  //     } else {
+
+  var imagewithpath = "Empty";
+  var insertquery = `INSERT INTO writers 
                     (
                         Name,Email,cell,dob,profile_picture,password
                     )
@@ -82,38 +84,30 @@ router.post("/RegisterWriter", async (req, res) => {
                         ?,?,?,?,?,?
                     )`;
 
-        mysqlconnection.query(
-          insertquery,
-          [Name, Email, ContactNo, DOB, imagewithpath, hashed],
-          (err, data) => {
-            if (err) {
-              if (err.errno == 1062) {
-                res.json({
-                  Msg: "Email already Exists",
-                });
-              }
+  mysqlconnection.query(
+    insertquery,
+    [Name, Email, ContactNo, DOB, imagewithpath, hashed],
+    (err, data) => {
+      if (err) {
+        if (err.errno == 1062) {
+          res.json({
+            Msg: "Email already Exists",
+          });
+        }
 
-              console.log(err);
-              res.json({
-                Msg: "Failed to Register in database",
-              });
-            } else {
-              res.json({
-                Msg: "Registered",
-              });
-              // res.json({
-              //     "Writer_id":data[0]
-              // })
-            }
-          }
-        );
+        res.json({
+          Msg: "Failed to Register in database",
+        });
+      } else {
+        res.json({
+          Msg: "Registered",
+        });
+        // res.json({
+        //     "Writer_id":data[0]
+        // })
       }
-    });
-  } else {
-    res.json({
-      Msg: "File Type Must be Jpeg,png or gif",
-    });
-  }
+    }
+  );
 
   // profile.mv("Writers/profilepictures/"+imagename,(err)=>{
   //     if(err){
