@@ -17,22 +17,27 @@ router.post("/adminlogin", (req, res) => {
 
   mysqlconnection.query(query, adminemail, (err, result) => {
     if (err) {
-      console.log(err);
+      res.json({
+        Msg: "Something Went Wrong",
+      });
     } else {
-      if (result.length) {
-        if (result[0].Password === adminpassword) {
+      if (result.length == 1) {
+        if (result[0].Password == adminpassword) {
           var token = jwt.sign({ admin: result[0] }, process.env.TOKEN);
-          console.log("password Matched");
+
           res.json({
             user: result[0],
             TOKEN: token,
           });
         } else {
-          console.log("password incorrect");
           res.json({
             Msg: "Invalid Password",
           });
         }
+      } else if (result.length == 0) {
+        res.json({
+          Msg: "No Admin Found with this email",
+        });
       } else {
         res.json({
           Msg: "Invalid Email",
