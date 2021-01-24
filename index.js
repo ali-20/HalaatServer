@@ -18,11 +18,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use(
-  cors({
-    origin: "https://halaatowaqiat.netlify.app",
-  })
-);
 app.use(fileUpload());
 
 const PORT = 5000;
