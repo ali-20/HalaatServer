@@ -12,11 +12,7 @@ const app = express();
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
-
+app.use(cors());
 app.use(fileUpload());
 
 const PORT = 5000;
