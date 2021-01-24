@@ -7,7 +7,6 @@ var Users = require("./routes/Usersroutes");
 var Articles = require("./routes/Scrapped_articleroutes");
 var Writer = require("./routes/Writerroutes");
 var cors = require("cors");
-var pro = require("./routes/News_Scrapping/propakistaniscrapped");
 
 const app = express();
 app.use(bodyparser.json());
@@ -23,7 +22,9 @@ app.listen(PORT, () => {
 
 //home route
 app.get("/", (req, res) => {
-  res.send("Welcome Home For Halaat Server");
+  res.json({
+    MSg: "welcome to halaat server",
+  });
 });
 
 app.use("/Users", Users);
