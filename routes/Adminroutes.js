@@ -5,10 +5,6 @@ var bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 var VerifyToken = require("./VerifyToken");
 
-router.get("/", (req, res) => {
-  console.log("This is the admin / route");
-});
-
 router.post("/adminlogin", (req, res) => {
   var adminemail = req.body.email;
   var adminpassword = req.body.password;
