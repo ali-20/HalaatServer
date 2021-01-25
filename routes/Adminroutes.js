@@ -6,7 +6,6 @@ var jwt = require("jsonwebtoken");
 var VerifyToken = require("./VerifyToken");
 
 router.post("/adminlogin", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   var adminemail = req.body.email;
   var adminpassword = req.body.password;
 
@@ -45,8 +44,6 @@ router.post("/adminlogin", (req, res) => {
 });
 
 router.post("/RegisterWriter", async (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-
   var Name = req.body.Name;
   var Email = req.body.Email;
   var ContactNo = req.body.ContactNo;
@@ -127,8 +124,6 @@ router.post("/RegisterWriter", async (req, res) => {
 });
 
 router.get("/getWritersDetail", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-
   var selectquery = `Select Writer_id, Name,Email,cell,dob,profile_picture from writers`;
 
   mysqlconnection.query(selectquery, (err, data) => {
@@ -165,7 +160,6 @@ router.get("/getWritersDetail", (req, res) => {
 });
 
 router.get("/getArticleDetail", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   var selectquery = `Select * from articles`;
 
   mysqlconnection.query(selectquery, (err, data) => {
@@ -187,7 +181,6 @@ router.get("/getArticleDetail", (req, res) => {
 });
 
 router.post("/approvearticle", VerifyToken, (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   const { ID } = req.body;
 
   const query = `UPDATE articles 

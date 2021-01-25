@@ -9,10 +9,20 @@ var Writer = require("./routes/Writerroutes");
 var cors = require("cors");
 
 const app = express();
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Methods", "GET,POST");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin,x-auth-token,Content-Type,Accept,application/json"
+  );
+});
+
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
 
-app.use(cors());
 app.use(fileUpload());
 
 const PORT = 5000;

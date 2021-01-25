@@ -6,7 +6,6 @@ var jwt = require("jsonwebtoken");
 var VerifyToken = require("./VerifyToken");
 
 router.post("/writerlogin", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   const { email, password } = req.body;
 
   const query = `select * from writers where Email=? `;
@@ -45,8 +44,6 @@ router.post("/writerlogin", (req, res) => {
 });
 
 router.post("/publisharticle", VerifyToken, (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-
   const {
     heading,
     body,

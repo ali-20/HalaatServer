@@ -10,7 +10,6 @@ var verifytoken = require("./VerifyToken");
 // Register Route for bew halaat User
 
 router.post("/register", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   var email = req.body.email;
   var name = req.body.name;
   var password = req.body.password;
@@ -99,7 +98,6 @@ router.post("/register", (req, res) => {
 //Login Route for Halaat User
 
 router.post("/Login", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   var email = req.body.email;
   var pass = req.body.password;
   var q = "select * from halaatusers where user_email=?";
@@ -186,7 +184,6 @@ router.post("/Login", (req, res) => {
 });
 
 router.get("/Fetch/:id", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   const id = req.params.id;
 
   const query = `select * from articles 
@@ -213,7 +210,6 @@ router.get("/Fetch/:id", (req, res) => {
 });
 
 router.get("/Fetchall", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   const query = `select * from articles 
     where article_status=?;`;
 
@@ -238,7 +234,6 @@ router.get("/Fetchall", (req, res) => {
 });
 
 router.get("/FetchGeneral", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   const query = `select * from articles 
     where article_status=? && article_category=?;`;
 
@@ -263,7 +258,6 @@ router.get("/FetchGeneral", (req, res) => {
 });
 
 router.get("/FetchTech", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   const query = `select * from articles 
     where article_status=? && article_category=?;`;
 
@@ -288,7 +282,6 @@ router.get("/FetchTech", (req, res) => {
 });
 
 router.get("/FetchSports", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   const query = `select * from articles 
     where article_status=? && article_category=?;`;
 
@@ -313,7 +306,6 @@ router.get("/FetchSports", (req, res) => {
 });
 
 router.get("/FetchEducation", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   const query = `select * from articles 
     where article_status=? && article_category=?;`;
 
@@ -338,7 +330,6 @@ router.get("/FetchEducation", (req, res) => {
 });
 
 router.get("/FetchBusiness", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   const query = `select * from articles 
     where article_status=? && article_category=?;`;
 
@@ -363,7 +354,6 @@ router.get("/FetchBusiness", (req, res) => {
 });
 
 router.get("/FetchHealth", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   const query = `select * from articles 
     where article_status=? && article_category=?;`;
 
@@ -388,7 +378,6 @@ router.get("/FetchHealth", (req, res) => {
 });
 
 router.post("/insertfavorite", verifytoken, (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   const {
     Email,
     article_id,
@@ -437,7 +426,6 @@ router.post("/insertfavorite", verifytoken, (req, res) => {
 });
 
 router.post("/fetchfavorites", verifytoken, (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   const { Email } = req.body;
 
   const query = `select * from favorite_articles where user_email=?;`;
