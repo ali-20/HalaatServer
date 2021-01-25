@@ -17,11 +17,6 @@ app.use(bodyparser.urlencoded({ extended: false }));
 
 app.use(fileUpload());
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,POST");
-});
-
 const PORT = 5000;
 
 app.listen(process.env.PORT || PORT, () => {
