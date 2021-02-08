@@ -7,6 +7,7 @@ var Users = require("./routes/Usersroutes");
 var Articles = require("./routes/Scrapped_articleroutes");
 var Writer = require("./routes/Writerroutes");
 var cors = require("cors");
+var propakistaniscrapper = require("./routes/News_Scrapping/propakistaniscrapped");
 
 const app = express();
 
